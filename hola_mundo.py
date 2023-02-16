@@ -1,2 +1,3 @@
 
-pritn("Hola mundo!")
+print("Hola mundo!")
+print("Adios...")
