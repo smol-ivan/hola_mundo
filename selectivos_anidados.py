@@ -6,9 +6,21 @@ Las posiciones en un tablero de ajedrez se identifican con una letra y un númer
 Dada una posición del tablero, determinar de qué color es esa casilla. Por ejemplo, si la posición es a1, el cuadrado es negro. Si la posición es d5, el cuadrado es blanco. En caso de que la posición no sea válida, indicarlo.
 
 """
-posicionColumna = input('Ingrese la columna en la que se encuentra la ficha (a-h): ')
-posicionFila    = int(input('Ingrese la fila en la que se encuentra la ficha (1-8): '))
+columna = input('Ingrese la columna en la que se encuentra la ficha (a-h): ')
+fila    = int(input('Ingrese la fila en la que se encuentra la ficha (1-8): '))
 
+if columna == 'a' or columna == 'c' or columna == 'e' or columna == 'g':
+    if fila % 2 == 0:
+        print('El color de la casilla es negro!')
+    else:
+        print('El color de la casilla es blanco!')
+elif columna == 'b' or columna == 'd' or columna == 'f' or columna == 'h':
+    if fila % 2 == 0:
+        print('El color de la casilla es blanco!')
+    else:
+        print('El color de la casilla es negro!')
+else: 
+    print('La posicion ingresada no es valida!')
 
 """
 Ejercicio 9
