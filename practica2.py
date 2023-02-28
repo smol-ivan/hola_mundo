@@ -29,8 +29,7 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
         -Cuotas:                                1% o 2% (del sueldo bruto mensual)
 
 1. Constantes.
-    Aportacion de Seguridad Social
-        impuesto_SS = 0.025
+
 
 2. Datos de entrada.
     hrs_laboradas
@@ -41,15 +40,18 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
 3. Calculos.
     Para el salario (Percepciones):
         -Horas trabajadas inferiores o iguales a 160
-            salario_brutoMensual = hrs_laboradas * salario_hr
+            salario_mensualBruto = hrs_laboradas * salario_hr
 
         -Horas que exceden las 160, sin pasar 200
             hrs_extra         = (hrs_laboradas - 160) 
-            salario_brutoMensual = (160 * salario_hr) + hrs_extra * (salario_hr * 1.5) 
+            salario_mensualBruto = (160 * salario_hr) + hrs_extra * (salario_hr * 1.5) 
 
         -Horas que exceden las 200
             hrs_dobleExtra    = (hrs_laboradas - 200) 
-            salario_brutoMensual = (160 * salario_hr) + 39 * (salario_hr 1.5) + horas_dobleExtra * (salario_hr * 2)
+            salario_mensualBruto = (160 * salario_hr) + 39 * (salario_hr 1.5) + horas_dobleExtra * (salario_hr * 2)
+    
+    Aportacion de Seguridad Social
+        impuesto_SS = salario_mensualBruto * 0.025
 
     Para los impuestos deducibles en sueldos:
         -Menores o iguales a $4,000
@@ -72,15 +74,15 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
 
     Para los miembros de la caja de ahorros de la empresa con una cuota porcentual:
         -Con una participacion del sueldo mensual bruto del 3% o 5%
-            cajaAhorro = salario_brutoMensual * 0.03
+            cajaAhorro = salario_mensualBruto * 0.03
             o
-            cajaAhorro = salario_brutoMensual * 0.05
+            cajaAhorro = salario_mensualBruto * 0.05
 
     Para los miembros del fondo de ahorro para el retiro, ahorro solidario:
         -Con una participacion de 1% o 2%
-            fondoRetiro = salario_brutoMensual * 0.01
+            fondoRetiro = salario_mensualBruto * 0.01
             o
-            fondoRetiro = salario_brutoMensual * 0.02
+            fondoRetiro = salario_mensualBruto * 0.02
 
 4. Datos de salida.
     -Percepciones 
@@ -95,25 +97,28 @@ participe_retiro = input("¿El empreado participa en el fondo de ahorro para el 
 
 #
 if hrs_laboradas <= 160:
-    salario_brutoMensual = hrs_laboradas * salario_hr
+    salario_mensualBruto = hrs_laboradas * salario_hr
 elif hrs_laboradas <= 200:
     hrs_extra            = (hrs_laboradas - 160) 
-    salario_brutoMensual = (160 * salario_hr) + (hrs_extra * salario_hr * 1.5)
+    salario_mensualBruto = (160 * salario_hr) + (hrs_extra * salario_hr * 1.5)
 else:
     hrs_dobleExtra       = (hrs_laboradas - 200) 
-    salario_brutoMensual = (160 * salario_hr) + (40 * salario_hr * 1.5) + (hrs_dobleExtra * salario_hr * 2)
+    salario_mensualBruto = (160 * salario_hr) + (40 * salario_hr * 1.5) + (hrs_dobleExtra * salario_hr * 2)
 
 #
-if salario_brutoMensual <= 4000:
+aporte_SS = salario_mensualBruto * 0.025
+
+#
+if salario_mensualBruto <= 4000:
     impuestos  = 0
-elif salario_brutoMensual <= 20000:
-    excedente  = salario_brutoMensual - 4000
+elif salario_mensualBruto <= 20000:
+    excedente  = salario_mensualBruto - 4000
     impuestos  = excedente * 0.2
-elif salario_brutoMensual <= 30000:
-    excedente  = salario_brutoMensual - 20000
+elif salario_mensualBruto <= 30000:
+    excedente  = salario_mensualBruto - 20000
     impuestos  = (16000 * 0.2) + (excedente * 0.25)
 else:
-    excedente  = salario_brutoMensual - 30000
+    excedente  = salario_mensualBruto - 30000
     impuestos  = (16000 * 0.2) + (10000 * 0.25) + (excedente * 0.35)
 
 #
@@ -124,9 +129,9 @@ if participe_ahorro.lower() == 'si':
     else:
         cuotaPorcentual = input("¿Que porcentaje aporta el empleado? (3 o 5): ")
         if cuotaPorcentual == '3':
-            caja_ahorro = salario_brutoMensual * 0.03
+            caja_ahorro = salario_mensualBruto * 0.03
         else:
-            caja_ahorro = salario_brutoMensual * 0.05
+            caja_ahorro = salario_mensualBruto * 0.05
 else:
     caja_ahorro = 0
 
@@ -134,10 +139,15 @@ else:
 if participe_retiro.lower() == 'si':
     tipoRetiro = input("¿Con que porcentaje participa el empleado? (1 o 2): ")
     if tipoRetiro == '1':
-        fondoRetiro = salario_brutoMensual * 0.01
+        fondoRetiro = salario_mensualBruto * 0.01
     else:
-        fondoRetiro = salario_brutoMensual * 0.02
+        fondoRetiro = salario_mensualBruto * 0.02
 else:
     fondoRetiro = 0
 
 #
+sueldo_mensualNeto = salario_mensualBruto - impuestos - caja_ahorro - fondoRetiro - aporte_SS
+
+#
+print('Las percepciones del empleado fueron de: $' + salario_mensualBruto + ' en el mes')
+print('')
