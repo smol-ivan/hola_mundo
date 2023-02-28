@@ -51,7 +51,7 @@ length_palabra = len(palabra)
 if length_palabra % 2 != 0:
     resultado = palabra[:(length_palabra - 1) // 2 ] + nuevaPalabra + palabra[(length_palabra + 1) // 2:]
 else:
-    resultado = palabra[:length_palabra  // 2 ] + nuevaPalabra + palabra[length_palabra  // 2:]
+    resultado = palabra[:length_palabra  // 2 ] + nuevaPalabra + palabra[length_palabra // 2:]
 
 
 print(resultado)
