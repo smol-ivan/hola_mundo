@@ -30,7 +30,6 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
 
 1. Constantes.
 
-
 2. Datos de entrada.
     hrs_laboradas
     salario_hr
@@ -59,17 +58,17 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
 
         -Hasta $20,000 
             Pagan el 20% del excedente de $4,000
-                excedente  = sueldo_brutoMensual - 4000
+                excedente  = salario_mensualBruto - 4000
                 impuestos  = excedente * 0.2
         
         -Hasta $30,000
             Pagan el impuesto anterior y el excedente de $20,000
-                excedente  = sueldo_brutoMensual - 20000
+                excedente  = salario_mensualBruto - 20000
                 impuestos  = (16000 * 0.2) + excedente * 0.25
         
         -Arriba de $30,000
             Pagan impuestos anteriores, mas el 35% del excedente de $30,000
-                excedente  = sueldo_brutoMensual - 30000
+                excedente  = salario_mensualBruto - 30000
                 impuestos  = (16000 * 0.2) + (10000 * 0.25) + excedente * 0.35
 
     Para los miembros de la caja de ahorros de la empresa con una cuota porcentual:
@@ -93,7 +92,7 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
 hrs_laboradas    = float(input("Ingrese las horas laboradas del mes: "))
 salario_hr       = float(input("Ingrese el salario por hora correspondiente al empleado: $"))
 participe_ahorro = input("¿El empleado participa en la caja de ahorro de la empresa? (Si - No): ")
-participe_retiro = input("¿El empreado participa en el fondo de ahorro para el retiro? (Si - No): ")
+participe_retiro = input("¿El empleado participa en el fondo de ahorro para el retiro? (Si - No): ")
 
 #
 if hrs_laboradas <= 160:
@@ -123,8 +122,8 @@ else:
 
 #
 if participe_ahorro.lower() == 'si':
-    tipoCuota = input("Indique la cuota que maneja el empleado en la caja de ahorro (Fija o Porcentual): ")
-    if tipoCuota.lower == "fija":
+    tipoCuota = input("\nIndique la cuota que maneja el empleado en la caja de ahorro (Fija o Porcentual): ")
+    if tipoCuota.lower() == "fija":
         caja_ahorro = 1000
     else:
         cuotaPorcentual = input("¿Que porcentaje aporta el empleado? (3 o 5): ")
@@ -137,7 +136,7 @@ else:
 
 #
 if participe_retiro.lower() == 'si':
-    tipoRetiro = input("¿Con que porcentaje participa el empleado? (1 o 2): ")
+    tipoRetiro = input("\n¿Con que porcentaje participa el empleado para el retiro? (1 o 2): ")
     if tipoRetiro == '1':
         fondoRetiro = salario_mensualBruto * 0.01
     else:
@@ -149,5 +148,15 @@ else:
 sueldo_mensualNeto = salario_mensualBruto - impuestos - caja_ahorro - fondoRetiro - aporte_SS
 
 #
-print('Las percepciones del empleado fueron de: $' + salario_mensualBruto + ' en el mes')
-print('')
+print('\n\n')
+print('Las percepciones del empleado fueron de: $' + str(salario_mensualBruto) + ' en el mes\n')
+print('Las deducciones correspondientes son las siguientes:')
+print('-Impuestos: $' + str(impuestos))
+print('-Seguro Social: $' + str(aporte_SS))
+if participe_ahorro.lower() == 'si':
+    print('-Caja de ahorro: $' + str(caja_ahorro) + '\n')
+
+if participe_retiro.lower() == 'si':
+    print('-Ahorro solidario: $' + str(fondoRetiro) + '\n')
+
+print('Salario mensual neto: $' + str(round(sueldo_mensualNeto, 1)))
