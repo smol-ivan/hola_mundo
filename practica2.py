@@ -88,7 +88,7 @@ Programa para calcular sueldo neto de un empleado dentro de una empresa.
     -Deducciones
     -Sueldo neto
 """
-
+print(' Programa para calcular salario neto dentro de la empresa' + '\n')
 hrs_laboradas    = float(input("Ingrese las horas laboradas del mes: "))
 salario_hr       = float(input("Ingrese el salario por hora correspondiente al empleado: $"))
 participe_ahorro = input("¿El empleado participa en la caja de ahorro de la empresa? (Si - No): ")
@@ -148,15 +148,16 @@ else:
 salario_mensualNeto = salario_mensualBruto - impuestos - caja_ahorro - fondoRetiro - aporte_SS
 
 #Datos de Salida (Percepciones, deducciones y sueldo neto)
-print('\n\n')
+print('\n')
 print('Las percepciones del empleado fueron de: $' + str(salario_mensualBruto) + ' en el mes\n')
 print('Las deducciones correspondientes son las siguientes:')
 print('-Impuestos: $' + str(impuestos))
 print('-Seguro Social: $' + str(aporte_SS))
 if participe_ahorro.lower() == 'si':
-    print('-Caja de ahorro: $' + str(caja_ahorro) + '\n')
+    print('-Caja de ahorro: $' + str(round((caja_ahorro), 1)) + '\n')
 
 if participe_retiro.lower() == 'si':
-    print('-Ahorro solidario: $' + str(fondoRetiro) + '\n')
+    print('-Ahorro solidario: $' + str(round((fondoRetiro), 1)) + '\n')
 
 print('Salario mensual neto: $' + str(round(salario_mensualNeto, 1)))
+print("\n\n~Ivan Javier Gordillo Solis \n~2223028708")
