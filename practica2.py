@@ -94,7 +94,7 @@ salario_hr       = float(input("Ingrese el salario por hora correspondiente al e
 participe_ahorro = input("¿El empleado participa en la caja de ahorro de la empresa? (Si - No): ")
 participe_retiro = input("¿El empleado participa en el fondo de ahorro para el retiro? (Si - No): ")
 
-#
+#Estructura para calcular el salario mensual bruto
 if hrs_laboradas <= 160:
     salario_mensualBruto = hrs_laboradas * salario_hr
 elif hrs_laboradas <= 200:
@@ -104,10 +104,10 @@ else:
     hrs_dobleExtra       = (hrs_laboradas - 200) 
     salario_mensualBruto = (160 * salario_hr) + (40 * salario_hr * 1.5) + (hrs_dobleExtra * salario_hr * 2)
 
-#
+#Calculo para aporte de Seguro Social
 aporte_SS = salario_mensualBruto * 0.025
 
-#
+#Estructura para calcular impuestos
 if salario_mensualBruto <= 4000:
     impuestos  = 0
 elif salario_mensualBruto <= 20000:
@@ -120,7 +120,7 @@ else:
     excedente  = salario_mensualBruto - 30000
     impuestos  = (16000 * 0.2) + (10000 * 0.25) + (excedente * 0.35)
 
-#
+#Estructura para calcular cuota en Caja de Ahorro
 if participe_ahorro.lower() == 'si':
     tipoCuota = input("\nIndique la cuota que maneja el empleado en la caja de ahorro (Fija o Porcentual): ")
     if tipoCuota.lower() == "fija":
@@ -134,7 +134,7 @@ if participe_ahorro.lower() == 'si':
 else:
     caja_ahorro = 0
 
-#
+#Estructura para calcular aporte para el retiro
 if participe_retiro.lower() == 'si':
     tipoRetiro = input("\n¿Con que porcentaje participa el empleado para el retiro? (1 o 2): ")
     if tipoRetiro == '1':
@@ -144,10 +144,10 @@ if participe_retiro.lower() == 'si':
 else:
     fondoRetiro = 0
 
-#
-sueldo_mensualNeto = salario_mensualBruto - impuestos - caja_ahorro - fondoRetiro - aporte_SS
+#Calculo de sueldo neto, despues de deducciones
+salario_mensualNeto = salario_mensualBruto - impuestos - caja_ahorro - fondoRetiro - aporte_SS
 
-#
+#Datos de Salida (Percepciones, deducciones y sueldo neto)
 print('\n\n')
 print('Las percepciones del empleado fueron de: $' + str(salario_mensualBruto) + ' en el mes\n')
 print('Las deducciones correspondientes son las siguientes:')
@@ -159,4 +159,4 @@ if participe_ahorro.lower() == 'si':
 if participe_retiro.lower() == 'si':
     print('-Ahorro solidario: $' + str(fondoRetiro) + '\n')
 
-print('Salario mensual neto: $' + str(round(sueldo_mensualNeto, 1)))
+print('Salario mensual neto: $' + str(round(salario_mensualNeto, 1)))
